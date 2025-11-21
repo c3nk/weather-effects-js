@@ -73,8 +73,11 @@
         </div>
     </div>
 
-    <script type="module">
-        import { createWeatherEffect } from './dist/weather-effects-js.es.js';
+    <!-- Load Weather Effects JS -->
+    <script src="./dist/weather-effects-js.umd.js"></script>
+    <script>
+        // UMD versiyonu window.WeatherEffectsJS üzerinden erişilebilir
+        const { createWeatherEffect } = window.WeatherEffectsJS;
 
         const preview = document.getElementById('preview');
         const effectSelect = document.getElementById('effectSelect');
