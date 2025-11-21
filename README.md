@@ -77,6 +77,8 @@ const unmount = mountRain({
 
 ## Demo
 
+**Live Demo:** [https://c3nk.com/examples/weather-effects-js/](https://c3nk.com/examples/weather-effects-js/)
+
 Run the demo locally:
 
 ```bash
