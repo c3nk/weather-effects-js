@@ -88,6 +88,9 @@ npm run dev
 
 Open http://localhost:5173 to see the interactive demo.
 
+### Screenshot
+![Weather Effects JS Demo](./screenshot.png)
+
 ## Features
 
 - ✅ Pure DOM rendering (no Canvas/WebGL)
