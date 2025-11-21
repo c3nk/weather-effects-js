@@ -1,0 +1,35 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.code-workspace
+.cursorrules
+
+# Linting and formatting
+.eslintrc*
+.prettierrc*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs (optional - uncomment if you don't want to track dist/)
+# dist/

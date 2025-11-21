@@ -97,10 +97,10 @@ Open http://localhost:5173 to see the interactive demo.
 
 ## Browser Support
 
-- Chrome 70+
-- Firefox 65+
-- Safari 12+
-- Edge 79+
+- Chrome 80+
+- Firefox 75+
+- Safari 14+
+- Edge 88+
 
 ## License
 
