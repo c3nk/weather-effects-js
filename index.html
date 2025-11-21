@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Effects JS - Demo</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        :root {
+            --bg: #f6f8ff;
+            --fg: #0b0b12;
+            --muted: #6b7280;
+            --card: #ffffff;
+            --border: #e5e7eb;
+            --brand: #1d4ed8;
+        }
+        html, body { height: 100%; margin: 0; }
+        body { color: var(--fg); background: linear-gradient(#f6f8ff,#eef2ff); font-family: ui-sans-serif, system-ui; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .preview { aspect-ratio: 16/9; background: linear-gradient(#bae6fd,#ffffff); border-radius: 12px; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .controls { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .field { display: grid; gap: 8px; margin-bottom: 16px; }
+        label { font-weight: 600; }
+        select, input[type="range"] { height: 36px; border: 1px solid var(--border); border-radius: 8px; padding: 0 12px; }
+        input[type="range"] { height: 6px; padding: 0; }
+        .row { display: flex; gap: 16px; align-items: center; }
+        .row > * { flex: 1; }
+        h1 { text-align: center; margin-bottom: 32px; }
+        .badge { background: var(--brand); color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; margin-left: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Effects JS <span class="badge">FREE</span></h1>
+
+        <div id="preview" class="preview"></div>
+
+        <div class="controls">
+            <div class="field">
+                <label for="effectSelect">Effect</label>
+                <select id="effectSelect">
+                    <option value="rain">Rain</option>
+                    <option value="snow">Snow</option>
+                    <option value="fog">Fog</option>
+                    <option value="sun">Sun</option>
+                    <option value="lightning">Lightning</option>
+                    <option value="cloudy">Cloudy</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="intensity">Intensity: <span id="intensityVal">70</span>%</label>
+                    <input type="range" id="intensity" min="0" max="100" value="70" />
+                </div>
+                <div class="field">
+                    <label for="wind">Wind: <span id="windVal">10</span>%</label>
+                    <input type="range" id="wind" min="0" max="100" value="10" />
+                </div>
+                <div class="field">
+                    <label for="density">Density: <span id="densityVal">60</span>%</label>
+                    <input type="range" id="density" min="0" max="100" value="60" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="modeSelect">Mode</label>
+                <select id="modeSelect">
+                    <option value="day">Day</option>
+                    <option value="night">Night</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createWeatherEffect } from './src/index.ts';
+
+        const preview = document.getElementById('preview');
+        const effectSelect = document.getElementById('effectSelect');
+        const intensity = document.getElementById('intensity');
+        const wind = document.getElementById('wind');
+        const density = document.getElementById('density');
+        const modeSelect = document.getElementById('modeSelect');
+        const intensityVal = document.getElementById('intensityVal');
+        const windVal = document.getElementById('windVal');
+        const densityVal = document.getElementById('densityVal');
+
+        let unmount = null;
+
+        function updateEffect() {
+            if (unmount) {
+                unmount();
+            }
+
+            unmount = createWeatherEffect(effectSelect.value, {
+                container: preview,
+                intensity: parseInt(intensity.value),
+                windSpeed: parseInt(wind.value),
+                density: parseInt(density.value),
+                mode: modeSelect.value
+            });
+
+            // Update background
+            const mode = modeSelect.value;
+            const backgrounds = {
+                day: 'linear-gradient(#bae6fd,#ffffff)',
+                night: 'linear-gradient(#0b1020,#1a2250)'
+            };
+            preview.style.background = backgrounds[mode] || backgrounds.day;
+        }
+
+        function updateValues() {
+            intensityVal.textContent = intensity.value;
+            windVal.textContent = wind.value;
+            densityVal.textContent = density.value;
+        }
+
+        effectSelect.addEventListener('change', updateEffect);
+        intensity.addEventListener('input', () => { updateValues(); updateEffect(); });
+        wind.addEventListener('input', () => { updateValues(); updateEffect(); });
+        density.addEventListener('input', () => { updateValues(); updateEffect(); });
+        modeSelect.addEventListener('change', updateEffect);
+
+        // Initial render
+        updateValues();
+        updateEffect();
+    </script>
+</body>
+</html>

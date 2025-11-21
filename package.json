@@ -1,0 +1,42 @@
+{
+  "name": "weather-effects-js",
+  "version": "1.0.0",
+  "description": "Lightweight DOM-based weather effects library",
+  "main": "dist/weather-effects-js.umd.js",
+  "module": "dist/weather-effects-js.es.js",
+  "unpkg": "dist/weather-effects-js.umd.js",
+  "jsdelivr": "dist/weather-effects-js.umd.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "weather",
+    "effects",
+    "dom",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/weather-effects-js.es.js",
+      "require": "./dist/weather-effects-js.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
+    "eslint": "^9.33.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.2"
+  },
+  "dependencies": {}
+}

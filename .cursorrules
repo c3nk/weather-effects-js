@@ -1,0 +1,67 @@
+# Project: weather-js (DOM-based weather effects)
+# Scope: Single-file demos (HTML/CSS/JS) with extensible structure
+# Editor: Cursor
+
+## Code Style & Lint
+- Use modern JS (ES2020+). No transpiler unless necessary.
+- Prefer const/let; avoid var.
+- Functions: small, pure where possible. One responsibility per function.
+- Naming: kebab-case for files, camelCase for variables, PascalCase for classes.
+- Comments: brief, actionable. Explain "why", not "what".
+- Indentation: 2 spaces. Max line length ~100 chars where practical.
+- HTML: semantic elements, ARIA where needed.
+- CSS: use CSS variables under :root; avoid !important; prefer utility classes where reasonable.
+
+## Structure
+- Keep each effect demo self-contained (one HTML file) but factor shared helpers to /lib if added later.
+- No external libraries for core effects (goal: our own implementation).
+- Day/Night logic must be toggleable: auto by local time + manual override for tests.
+
+## Performance
+- DOM-only effects by default. Keep node count minimal; batch DOM writes with requestAnimationFrame.
+- Avoid layout thrashing: read DOM, then write DOM.
+- CSS transitions/animations should be GPU-friendly (transform/opacity).
+- Provide an “intensity” parameter on effects (low/med/high) to control cost on low-end devices.
+
+## Accessibility & UX
+- Respect WCAG basics: sufficient contrast, reduced motion support (prefers-reduced-motion).
+- Controls must be keyboard accessible and screen-reader friendly.
+- Provide text labels and tooltips for toggles/sliders.
+- If motion is significant, add a visible “Reduce effects” toggle.
+
+## i18n
+- Default language: English. Planned languages: tr, de, fr, es.
+- All visible strings must be sourced from a language map (when i18n file arrives).
+- Do not hardcode UI text in JS; route via i18n helper stub.
+
+## Weather Mapping (OpenWeather)
+- We model visual params from OpenWeather condition codes.
+- Mapping table must be a plain JS object: { code|group: { effect: "...", intensity: n, params: {...} } }.
+- Keep mapping overridable via URL params or a small config panel for demos.
+
+## Logging & Dev Mode
+- Console logs grouped under `[weather-js]`.
+- Log levels: silent | summary (default) | verbose (dev).
+- No PII, no network calls except documented demos.
+
+## Versioning & Banners
+- Each demo shows version in console on load: WEATHER_JS_VERSION.
+- If later a remote “latest version” JSON is added, warn but don’t block.
+
+## Files to Add/Touch (near-term)
+- /demos/sun.html (exists)
+- /demos/_shared.css (optional later)
+- /demos/_controls.js (optional later)
+- /demos/openweather-demo.html or integrate a right-side tab next to Weather Controls in the main demo
+
+## “Do/Don’t”
+- DO: Keep UI minimal; tabbed panels instead of multiple popups.
+- DO: Provide manual Day/Night toggle for QA.
+- DON’T: Introduce heavy frameworks; DON’T block render with long JS loops.
+
+## Current Status (where we left off)
+- Weather Controls exists.
+- NEXT: Add an “OpenWeather Demo” area **next to Weather Controls** that shows:
+  - dropdown for condition group/code,
+  - live mapping → parameters,
+  - immediate preview update (no page reload).
