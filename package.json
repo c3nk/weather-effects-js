@@ -1,6 +1,6 @@
 {
   "name": "weather-effects-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight DOM-based weather effects library",
   "main": "dist/weather-effects-js.umd.js",
   "module": "dist/weather-effects-js.es.js",
